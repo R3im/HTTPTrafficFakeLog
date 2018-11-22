@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+ 
+    <!-- Logging Properties -->
+    <Properties>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %m%n</Property>
+        <Property name="HTTP_LOG_PATTERN">%m%n</Property>
+        <Property name="APP_LOG_ROOT">c:/tmp</Property>
+        <Property name="APP_LOG_FILENAME">access</Property>
+    </Properties>
+     
+    <Appenders>
+     
+        <!-- Console Appender -->
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+         
+        <!-- File Appenders on need basis -->
+        <RollingFile name="File" fileName="${APP_LOG_ROOT}/${APP_LOG_FILENAME}.log"
+            filePattern="${APP_LOG_ROOT}/${APP_LOG_FILENAME}-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="${HTTP_LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+         
+         
+    </Appenders>
+ 
+    <Loggers>
+                 
+        <Root level="trace">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File" level="info"/>
+        </Root>
+ 
+    </Loggers>
+ 
+</Configuration>
