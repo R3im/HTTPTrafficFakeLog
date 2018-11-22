@@ -42,7 +42,7 @@ public class FakeLog {
 	}
 
 	public void startGenerating() {
-		// starts infinite loop
+		// starts infinite loop 
 		Date lastSwitchDate = new Date();
 		int currentTrafficTime = LOW_TRAFFIC_MAX_TIME;
 		while (true) {
