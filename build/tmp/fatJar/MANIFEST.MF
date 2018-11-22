@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 Implementation-Title: HTTP Traffic Fake log
 Implementation-Version: 1.0
-Main-Class: main.java.com.httptrafficfakelog.FakeLog
+Main-Class: com.httptrafficfakelog.FakeLog
 

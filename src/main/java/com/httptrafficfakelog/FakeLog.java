@@ -1,4 +1,4 @@
-package main.java.com.httptrafficfakelog;
+package com.httptrafficfakelog;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,7 +18,7 @@ public class FakeLog {
 
 	private final Random random = new Random();
 	private final static int LOW_TRAFFIC_MAX_TIME = 1000 * 3;
-	private final static int HIGH_TRAFFIC_MAX_TIME = 800;
+	private final static int HIGH_TRAFFIC_MAX_TIME = 50;
 	private final static int LOW_HIGH_MAX_TIME_SWITCH = 1000 * 60 * 2;
 	private final static String[] REMOTEHOSTS = new String[] { "127.0.0.1" };
 	private final static String[] RFC931S = new String[] { "-" };
@@ -31,7 +31,7 @@ public class FakeLog {
 			"/api/product", "/shop", "/shop/product", "/shop/product/computer", "/shop/product/games",
 			"/shop/product/clothes", "/shop/product/shoes", "/sport", "/sport/soccer", "/sport/baseball",
 			"/sport/tennis", "/sport/baseball", "/sport/basketball", "/sport/golf", "/sport/hockey",
-			"/sport/volleyball", "/sport/rugby" };
+			"/sport/volleyball", "/sport/rugby", "/weather" , "/bank", "/mail", "/health"};
 	private final static String[] REQUEST_PROTOCOL = new String[] { "HTTP/1.0" };
 	private final static int[] HTTP_STATUS_CODES = new int[] { 200, 300, 301, 302, 304, 307, 400, 401, 403, 404, 410,
 			500, 501, 503, 550 };
