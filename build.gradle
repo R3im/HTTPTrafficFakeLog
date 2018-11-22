@@ -5,31 +5,30 @@
  * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds/
  */
 
- apply plugin: 'java'
-apply plugin: 'eclipse'
-
-version = '1.0'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-task fatJar(type: Jar) {
-	manifest {
-        attributes 'Implementation-Title': 'HTTP Traffic Fake log',  
-        	'Implementation-Version': version,
-        	'Main-Class': 'main.java.com.httptrafficfakelog.FakeLog'
-    }
-    baseName = project.name + ''
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
-}
-
-repositories {
-    jcenter()
-    mavenCentral()
-}
-
-dependencies{
-	compile group: 'org.apache.logging.log4j', name:'log4j-api', version:'2.11.1'
-	compile group: 'org.apache.logging.log4j', name:'log4j-core', version:'2.11.1'
+	apply plugin: 'java'
+	apply plugin: 'eclipse'
 	
-}
+	version = '1.0'
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+	
+	task fatJar(type: Jar) {
+		manifest {
+	        attributes 'Implementation-Title': 'HTTP Traffic Fake log',  
+	        	'Implementation-Version': version,
+	        	'Main-Class': 'main.java.com.httptrafficfakelog.FakeLog'
+	    }
+	    baseName = project.name + ''
+	    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	    with jar
+	}
+	//java -jar build/libs/HTTPTrafficFakeLog-1.0.jar
+	repositories {
+	    jcenter()
+	    mavenCentral()
+	}
+	
+	dependencies{
+		compile group: 'org.apache.logging.log4j', name:'log4j-api', version:'2.11.1'
+		compile group: 'org.apache.logging.log4j', name:'log4j-core', version:'2.11.1'
+	}

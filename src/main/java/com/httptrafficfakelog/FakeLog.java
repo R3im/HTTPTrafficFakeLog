@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 public class FakeLog {
 
-	static Logger logger = LogManager.getLogger(FakeLog.class.getName());
+	private final static Logger logger = LogManager.getLogger(FakeLog.class.getName());
 
 	public static void main(String[] args) {
 		new FakeLog().startGenerating();
@@ -66,7 +66,7 @@ public class FakeLog {
 				logFakeTraffic(logDate);
 
 			} catch (InterruptedException e) {
-				logger.debug(e);
+				logger.debug(e.getMessage(),e);
 			}
 		}
 	}
