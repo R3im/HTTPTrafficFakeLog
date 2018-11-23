@@ -18,7 +18,7 @@ public class FakeLog {
 
 	private final Random random = new Random();
 	private final static int LOW_TRAFFIC_MAX_TIME = 1000 * 3;
-	private final static int HIGH_TRAFFIC_MAX_TIME = 1000;
+	private final static int HIGH_TRAFFIC_MAX_TIME = 500;
 	private final static int LOW_HIGH_MAX_TIME_SWITCH = 1000 * 60 * 2 + 1000;
 	private final static String[] REMOTEHOSTS = new String[] { "127.0.0.1" };
 	private final static String[] RFC931S = new String[] { "-" };
