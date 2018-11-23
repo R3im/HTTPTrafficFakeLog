@@ -18,8 +18,8 @@ public class FakeLog {
 
 	private final Random random = new Random();
 	private final static int LOW_TRAFFIC_MAX_TIME = 1000 * 3;
-	private final static int HIGH_TRAFFIC_MAX_TIME = 50;
-	private final static int LOW_HIGH_MAX_TIME_SWITCH = 1000 * 60 * 2;
+	private final static int HIGH_TRAFFIC_MAX_TIME = 1000;
+	private final static int LOW_HIGH_MAX_TIME_SWITCH = 1000 * 60 * 2 + 1000;
 	private final static String[] REMOTEHOSTS = new String[] { "127.0.0.1" };
 	private final static String[] RFC931S = new String[] { "-" };
 	private final static String[] AUTHUSERS = new String[] { "james", "jill", "frank", "mary", "jeanne", "john",
@@ -31,7 +31,7 @@ public class FakeLog {
 			"/api/product", "/shop", "/shop/product", "/shop/product/computer", "/shop/product/games",
 			"/shop/product/clothes", "/shop/product/shoes", "/sport", "/sport/soccer", "/sport/baseball",
 			"/sport/tennis", "/sport/baseball", "/sport/basketball", "/sport/golf", "/sport/hockey",
-			"/sport/volleyball", "/sport/rugby", "/weather" , "/bank", "/mail", "/health"};
+			"/sport/volleyball", "/sport/rugby", "/weather", "/bank", "/mail", "/health" };
 	private final static String[] REQUEST_PROTOCOL = new String[] { "HTTP/1.0" };
 	private final static int[] HTTP_STATUS_CODES = new int[] { 200, 300, 301, 302, 304, 307, 400, 401, 403, 404, 410,
 			500, 501, 503, 550 };
@@ -42,14 +42,15 @@ public class FakeLog {
 	}
 
 	public void startGenerating() {
-		// starts infinite loop 
+		// starts infinite loop
 		Date lastSwitchDate = new Date();
 		int currentTrafficTime = LOW_TRAFFIC_MAX_TIME;
 		while (true) {
 			try {
 				Date logDate = new Date();
-				//do switch
-				if (logDate.getTime() - lastSwitchDate.getTime() > (long)random.nextInt(LOW_HIGH_MAX_TIME_SWITCH)) {
+				// do switch
+				if (logDate.getTime() - lastSwitchDate
+						.getTime() > (long) LOW_HIGH_MAX_TIME_SWITCH/* random.nextInt(LOW_HIGH_MAX_TIME_SWITCH) */) {
 					lastSwitchDate = logDate;
 					currentTrafficTime = currentTrafficTime == LOW_TRAFFIC_MAX_TIME ? HIGH_TRAFFIC_MAX_TIME
 							: LOW_TRAFFIC_MAX_TIME;
@@ -62,11 +63,11 @@ public class FakeLog {
 				} else {
 					TimeUnit.MILLISECONDS.sleep((long) random.nextInt(currentTrafficTime));
 				}
-				//append log
+				// append log
 				logFakeTraffic(logDate);
 
 			} catch (InterruptedException e) {
-				logger.debug(e.getMessage(),e);
+				logger.debug(e.getMessage(), e);
 			}
 		}
 	}
