@@ -22,7 +22,8 @@
 	    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 	    with jar
 	}
-	//java -jar build/libs/HTTPTrafficFakeLog-1.0.jar
+	//	
+	
 	repositories {
 	    jcenter()
 	    mavenCentral()

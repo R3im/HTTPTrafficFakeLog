@@ -7,19 +7,36 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.config.Configuration;
+import org.apache.logging.log4j.core.util.Integers;
 
 public class FakeLog {
 
 	private final static Logger logger = LogManager.getLogger(FakeLog.class.getName());
 
 	public static void main(String[] args) {
+		boolean isVerbose = false;
+		for (int i = 0; i < args.length; i++) {
+			String arg = args[i];
+			if (arg.equals("-v")) {
+				isVerbose = true;
+				break;
+			}
+		}
+		if (isVerbose) {
+			final LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
+			final Configuration config = ctx.getConfiguration();
+			config.getRootLogger().removeAppender("Console");
+			ctx.updateLoggers();
+		}
 		new FakeLog().startGenerating();
 	}
 
 	private final Random random = new Random();
 	private final static int LOW_TRAFFIC_MAX_TIME = 1000 * 3;
 	private final static int HIGH_TRAFFIC_MAX_TIME = 500;
-	private final static int LOW_HIGH_MAX_TIME_SWITCH = 1000 * 60 * 2 + 1000;
+	private final static int LOW_HIGH_MAX_TIME_SWITCH = 1000 * 60 * 2 + 1000 * 10;
 	private final static String[] REMOTEHOSTS = new String[] { "127.0.0.1" };
 	private final static String[] RFC931S = new String[] { "-" };
 	private final static String[] AUTHUSERS = new String[] { "james", "jill", "frank", "mary", "jeanne", "john",
@@ -58,8 +75,9 @@ public class FakeLog {
 				// if is low traffic we get the random value between HIGH_TRAFFIC_MAX_TIME and
 				// LOW_TRAFFIC_MAX_TIME
 				if (currentTrafficTime == LOW_TRAFFIC_MAX_TIME) {
-					TimeUnit.MILLISECONDS.sleep((long) random.nextInt(LOW_TRAFFIC_MAX_TIME - HIGH_TRAFFIC_MAX_TIME + 1)
-							+ HIGH_TRAFFIC_MAX_TIME);
+					TimeUnit.MILLISECONDS
+							.sleep((long) random.nextInt(LOW_TRAFFIC_MAX_TIME - LOW_TRAFFIC_MAX_TIME / 2 + 1)
+									+ LOW_TRAFFIC_MAX_TIME / 2);
 				} else {
 					TimeUnit.MILLISECONDS.sleep((long) random.nextInt(currentTrafficTime));
 				}
