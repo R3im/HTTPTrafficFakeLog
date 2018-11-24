@@ -1,5 +1,7 @@
 package com.httptrafficfakelog;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -9,7 +11,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.config.Configuration;
-import org.apache.logging.log4j.core.util.Integers;
 
 public class FakeLog {
 
@@ -24,18 +25,28 @@ public class FakeLog {
 				break;
 			}
 		}
-		if (isVerbose) {
-			final LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
-			final Configuration config = ctx.getConfiguration();
+		final LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
+		final Configuration config = ctx.getConfiguration();
+		if (!isVerbose) {
 			config.getRootLogger().removeAppender("Console");
 			ctx.updateLoggers();
+		}
+
+		File file = new File(config.getProperties().get("APP_LOG_FILENAME")+".log");
+		if (file.exists()) {
+			file.delete();
+		}
+		try {
+			file.createNewFile();
+		} catch (IOException e) {
+			logger.debug(e.getMessage(), e);
 		}
 		new FakeLog().startGenerating();
 	}
 
 	private final Random random = new Random();
 	private final static int LOW_TRAFFIC_MAX_TIME = 1000 * 3;
-	private final static int HIGH_TRAFFIC_MAX_TIME = 500;
+	private final static int HIGH_TRAFFIC_MAX_TIME = 200;
 	private final static int LOW_HIGH_MAX_TIME_SWITCH = 1000 * 60 * 2 + 1000 * 10;
 	private final static String[] REMOTEHOSTS = new String[] { "127.0.0.1" };
 	private final static String[] RFC931S = new String[] { "-" };
