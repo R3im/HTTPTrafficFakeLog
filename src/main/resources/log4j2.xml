@@ -5,8 +5,7 @@
     <Properties>
         <Property name="LOG_PATTERN">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %m%n</Property>
         <Property name="HTTP_LOG_PATTERN">%m%n</Property>
-        <Property name="APP_LOG_ROOT">/tmp</Property>
-        <Property name="APP_LOG_FILENAME">access</Property>
+        <Property name="APP_LOG_FILENAME">/var/log/access</Property>
     </Properties>
      
     <Appenders>
@@ -17,8 +16,8 @@
         </Console>
          
         <!-- File Appenders on need basis -->
-        <RollingFile name="File" fileName="${APP_LOG_ROOT}/${APP_LOG_FILENAME}.log"
-            filePattern="${APP_LOG_ROOT}/${APP_LOG_FILENAME}-%d{yyyy-MM-dd}-%i.log">
+        <RollingFile name="File" fileName="${APP_LOG_FILENAME}.log"
+            filePattern="${APP_LOG_FILENAME}-%d{yyyy-MM-dd}-%i.log">
             <PatternLayout pattern="${HTTP_LOG_PATTERN}"/>
             <Policies>
                 <SizeBasedTriggeringPolicy size="10MB" />

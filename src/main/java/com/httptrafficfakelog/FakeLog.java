@@ -15,27 +15,9 @@ public class FakeLog {
 
 	private final static Logger logger = LogManager.getLogger(FakeLog.class.getName());
 
-	public static void main(String[] args) {
-		boolean isVerbose = false;
-		for (int i = 0; i < args.length; i++) {
-			String arg = args[i];
-			if (arg.equals("-v")) {
-				isVerbose = true;
-				break;
-			}
-		}
-		if (isVerbose) {
-			final LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
-			final Configuration config = ctx.getConfiguration();
-			config.getRootLogger().removeAppender("Console");
-			ctx.updateLoggers();
-		}
-		new FakeLog().startGenerating();
-	}
-
 	private final Random random = new Random();
 	private final static int LOW_TRAFFIC_MAX_TIME = 1000 * 3;
-	private final static int HIGH_TRAFFIC_MAX_TIME = 500;
+	private final static int HIGH_TRAFFIC_MAX_TIME = 100;
 	private final static int LOW_HIGH_MAX_TIME_SWITCH = 1000 * 60 * 2 + 1000 * 10;
 	private final static String[] REMOTEHOSTS = new String[] { "127.0.0.1" };
 	private final static String[] RFC931S = new String[] { "-" };

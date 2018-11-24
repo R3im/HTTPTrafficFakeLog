@@ -16,7 +16,7 @@
 		manifest {
 	        attributes 'Implementation-Title': 'HTTP Traffic Fake log',  
 	        	'Implementation-Version': version,
-	        	'Main-Class': 'com.httptrafficfakelog.FakeLog'
+	        	'Main-Class': 'com.httptrafficfakelog.Main'
 	    }
 	    baseName = project.name + ''
 	    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
