@@ -5,6 +5,7 @@ import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.config.Configuration;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
+import org.fusesource.jansi.Ansi.Erase;
 
 /**
  * Launch HTTP traffic fake log generation
@@ -53,6 +54,8 @@ public class Main {
 				final Configuration config = ctx.getConfiguration();
 				config.getRootLogger().removeAppender("Console");
 				ctx.updateLoggers();
+				//set green color
+				AnsiConsole.out.println(Ansi.ansi().eraseScreen(Erase.ALL).fgBrightGreen());
 			}
 			new FakeLog().startGenerating();
 		} finally {
