@@ -8,11 +8,16 @@ import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Fake log processing
+ * 
+ * @author Remi c
+ *
+ */
 public class FakeLog {
 
 	private final static Logger logger = LogManager.getLogger(FakeLog.class.getName());
 
-	private final Random random = new Random();
 	private final static int LOW_TRAFFIC_MAX_TIME = 1000 * 3;
 	private final static int HIGH_TRAFFIC_MAX_TIME = 100;
 	
@@ -32,12 +37,15 @@ public class FakeLog {
 	private final static String[] REQUEST_PROTOCOL = new String[] { "HTTP/1.0" };
 	private final static int[] HTTP_STATUS_CODES = new int[] { 200, 300, 301, 302, 304, 307, 400, 401, 403, 404, 410,
 			500, 501, 503, 550 };
+	
 	private final static int MAX_BYTES_LENGTH = 250;
+	
+	private final Random random = new Random();
 
-	public FakeLog() {
 
-	}
-
+	/**
+	 * starts log generation
+	 */
 	public void startGenerating() {
 		// starts infinite loop
 		Date lastSwitchDate = new Date();
@@ -70,6 +78,11 @@ public class FakeLog {
 		}
 	}
 
+	/**
+	 * write traffic with random values from defined arrays
+	 * 
+	 * @param logDate
+	 */
 	private void logFakeTraffic(Date logDate) {
 
 		StringBuilder logSB = new StringBuilder();
