@@ -22,10 +22,10 @@ Installation
    and execute `java -jar HTTPTrafficFakeLog.jar`.
    Jar options:
 ```
-	`USAGE: HTTPTrafficFakeLog [option...] [--help]
-		-?, -h, --help               Shows this help message.
-		-log, -l                     Set HTTP log file fullpath (default: "/var/log/access.log").
-		-verbose, -v                 Log statistics into console while writing to file.`
+   `USAGE: HTTPTrafficFakeLog [option...] [--help]
+	-?, -h, --help               Shows this help message.
+	-log, -l                     Set HTTP log file fullpath (default: "/var/log/access.log").
+	-verbose, -v                 Log statistics into console while writing to file.`
 ```
 
 Build instructions
