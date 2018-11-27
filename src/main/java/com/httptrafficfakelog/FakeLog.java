@@ -27,7 +27,7 @@ public class FakeLog {
 	private final static String[] AUTHUSERS = new String[] { "james", "jill", "frank", "mary", "jeanne", "john",
 			"oliver", "jack", "harry", "jacob", "robert", "olivia", "amelia", "ava", "lily", "sophie", "bethany",
 			"megan" };
-	private final static SimpleDateFormat dateFormat = new SimpleDateFormat("[dd/MM/yyyy:HH:mm:ss ZZZ]");
+	private final static SimpleDateFormat dateFormat = new SimpleDateFormat("[dd/MMM/yyyy:HH:mm:ss ZZZ]");
 	private final static String[] REQUEST_TYPE = new String[] { "GET", "POST", "PUT", "HEAD", "DELETE" };
 	private final static String[] REQUEST_RESOURCE = new String[] { "/report", "/api", "/api/user", "/api/customer",
 			"/api/product", "/shop", "/shop/product", "/shop/product/computer", "/shop/product/games",
